@@ -32,7 +32,7 @@ function Shop() {
   <Route path="/checkout">
     <Checkout />
   </Route>
-  <Route path="/productpage">
+  <Route path="/products/:id">
     <ProductPage />
   </Route>
 </Switch>

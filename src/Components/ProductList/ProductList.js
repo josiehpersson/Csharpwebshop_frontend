@@ -5,11 +5,11 @@ function ProductList(props) {
 let productsHTML = props.product.map((product) => {
   return(
     <ListItem
-    key={product.Id}
-    title={product.Title}
-    image ={product.Image}
-    alt={`${product.Title}`}
-    price={product.Price}
+    key={product.id}
+    title={product.title}
+    image ={product.image}
+    alt={`${product.title}`}
+    price={product.price}
     link={`/productpage`}
     /> 
   )
