@@ -10,7 +10,7 @@ let productsHTML = props.product.map((product) => {
     image ={product.image}
     alt={`${product.title}`}
     price={product.price}
-    link={`/productpage`}
+    link={`/product/${product.id}`}
     /> 
   )
 })

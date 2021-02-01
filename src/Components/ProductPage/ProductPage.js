@@ -10,7 +10,7 @@ function ProductPage(props) {
   useEffect(()=> {
     axios
     .get(
-      `https://localhost:5001/products/${id}`
+      `https://localhost:5001/product/${id}`
     )
     .then((res) => {
       setProductInfo(res.data);
@@ -20,17 +20,25 @@ function ProductPage(props) {
     })
   },[]);
 
-  
+  const handleClick = () => {
+    let product = {
+      productId : productInfo.id,
+      productPrice : productInfo.price 
+    };
+    props.updateCount(product);
+  }
+
+
   return (
     <div className="productpage-container">
-      <img src={productInfo.image} alt="Hifiman Susvara image" className={`${productInfo.title} image`}/>
+      <img src={productInfo.image} alt={`${productInfo.title} image`} className={`${productInfo.title} image`}/>
       <div className="productinfo-container">
         <div className="productinfo">
           <h5>{productInfo.title}</h5>
           <p>{productInfo.description}</p>
         </div>
         <p className="pricetag">{productInfo.price}:-</p>
-        <button type="button" className="cart-btn">Add</button>
+        <button type="button" className="cart-btn" onClick={handleClick}>Add</button>
       </div>
     </div>
   );

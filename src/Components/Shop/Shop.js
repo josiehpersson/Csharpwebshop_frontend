@@ -3,6 +3,8 @@ import Checkout from '../Checkout/Checkout';
 import ProductPage from '../ProductPage/ProductPage';
 import Home from '../Home/Home';
 import HomeIcon from '../Icons/home.GIF';
+import Admin from '../Admin/Admin';
+import Cart from '../Cart/Cart';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import './shop.css';
@@ -12,6 +14,18 @@ function Shop() {
   
   const myCart = [];
   const [cart, setCart] = useState(myCart);
+
+  const addToCart = (props) => {
+    myCart.push(...cart);
+    let product = {
+      productId : props.productId,
+      Price : props.productPrice,
+    };
+    myCart.push(product);
+    setCart(myCart);
+    console.log(myCart, cart);
+    setCartTotal(cartTotal + 1);
+  }
   
   return (
     <div className="shop">
@@ -20,8 +34,11 @@ function Shop() {
   <Link to="/" className="nav-link home-link">
     <img src={HomeIcon} alt="Home-icon" className="home-icon" />
   </Link>
+  <Link to="/admin" className="nav-link admin-link">
+    ADMIN
+  </Link>
   <Link to="/checkout" className="nav-link cart-link">
-    Cart
+    <Cart total={cartTotal} />
   </Link>
 </header>
 
@@ -30,10 +47,16 @@ function Shop() {
     <Home />
   </Route>
   <Route path="/checkout">
-    <Checkout />
+    <Checkout myShoppingCart={cart}/>
   </Route>
-  <Route path="/products/:id">
-    <ProductPage />
+  <Route path="/checkout">
+    <Cart total = {cartTotal} />
+  </Route>
+  <Route path="/product/:id">
+    <ProductPage updateCount={addToCart} />
+  </Route>
+  <Route path="/admin">
+    <Admin />
   </Route>
 </Switch>
       </Router>
