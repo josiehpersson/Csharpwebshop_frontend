@@ -6,7 +6,7 @@ function ListItem(props){
 return (
     <div 
     className="listitem"
-    key={props.key}
+    key={props.id}
     data-info={[props.price, props.title]}>
         <h5>{props.title}</h5>
         <div className="product-info">

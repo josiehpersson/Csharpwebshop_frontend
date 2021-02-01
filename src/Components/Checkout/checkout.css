@@ -1,0 +1,27 @@
+.checkout-container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    padding: 5em;
+}
+
+.user-information {
+    width: 50%;
+    height: auto;
+}
+
+.checkout-cart-container {
+    width: 40%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.checkout-cart-container > button {
+    border-radius: 5px;
+    padding: 2mm 5mm 2mm 5mm;
+    border: none;
+    background-color: #FFB03A;
+    color: white;
+}

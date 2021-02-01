@@ -1,0 +1,12 @@
+.form-container {
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.form-container > label {
+    text-align: left;
+    margin-top: 1em;
+}
+.form-container > input {
+    width: 50%;
+}
