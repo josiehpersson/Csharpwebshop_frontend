@@ -3,8 +3,7 @@ import './userform.css';
 
 export default function UserForm(props) {
     const formDefault = {
-        firstname: '',
-        lastname: '',
+        fullname: '',
         address: '',
         zipcode: '',
         city: '',
@@ -23,21 +22,12 @@ export default function UserForm(props) {
         <form>
             <div className="form-container">
 
-                <label htmlFor="firstname">First Name</label>
+                <label htmlFor="fullname">Full Name</label>
                 <input
                 type="text"
-                id="firstname"
-                name="firstname"
-                value={userForm.firstname}
-                onChange={updateUserForm}
-                />
-
-                <label htmlFor="lastname">Last Name</label>
-                <input
-                type="text"
-                id="lastname"
-                name="lastname"
-                value={userForm.lastname}
+                id="fullname"
+                name="fullname"
+                value={userForm.fullname}
                 onChange={updateUserForm}
                 />
 

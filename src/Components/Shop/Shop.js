@@ -23,14 +23,32 @@ function Shop() {
   const addToCart = (props) => {
     myCart.push(...cart);
     let product = {
+      title: props.title,
       productId : props.productId,
-      Price : props.price,
+      price : props.price,
     };
     myCart.push(product);
     setCart(myCart);
     console.log(myCart, cart);
     setCartTotal(cartTotal + 1);
   }
+
+const removeFromCart = (props) => {
+  const cartItems = myCart.map((product) => {
+    const tempCart = [...myCart];
+    const item = {
+      title: props.title,
+      productId: props.productId,
+      price: props.price,
+    };
+    let itemIndex = tempCart.findIndex(function(ind) {
+      return ind.productId === item.productId;
+    });
+    if(itemIndex !== -1) {
+      tempCart.splice(itemIndex, 1);
+    }
+  });
+}
   
   return (
     <div className="shop">
@@ -52,7 +70,7 @@ function Shop() {
     <Home />
   </Route>
   <Route path="/checkout">
-    <Checkout myShoppingCart={cart}/>
+    <Checkout myShoppingCart={cart} updateCart={removeFromCart}/>
   </Route>
   <Route path="/checkout">
     <Cart total = {cartTotal} />

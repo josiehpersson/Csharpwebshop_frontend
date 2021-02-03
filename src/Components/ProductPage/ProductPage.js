@@ -22,8 +22,9 @@ function ProductPage(props) {
 
   const handleClick = () => {
     let product = {
+      title: productInfo.title,
       productId : productInfo.id,
-      productPrice : productInfo.price 
+      price : productInfo.price 
     };
     props.updateCount(product);
   }

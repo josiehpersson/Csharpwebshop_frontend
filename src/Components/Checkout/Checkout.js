@@ -7,8 +7,7 @@ import axios from 'axios';
 
 export default function Checkout(props) {
   const formDefault = {
-    firstname: '',
-    lastname: '',
+    fullname: '',
     address: '',
     zipcode: '',
     city: '',
@@ -19,11 +18,18 @@ export default function Checkout(props) {
   const [shoppingCart, setShoppingCart] = useState(cartDefault);
 
   const [sum, setSum] = useState(0);
-
+  const defaultOrderRowsToShip = {};
+  const [orderRowsToShip, setOrderRowsToShip] = useState(defaultOrderRowsToShip);
   const myCart = [];
-
+  
   useEffect(() => {
-    myCart.push(...shoppingCart);
+    calculateShoppingCart();
+    calculateOrderRows();
+    //myCart.push(...shoppingCart);
+  }, []);
+  
+  const calculateShoppingCart = () => {
+    setSum(0);
     myCart.push(...props.myShoppingCart);
     setShoppingCart(myCart);
     let total = 0;
@@ -31,23 +37,32 @@ export default function Checkout(props) {
       total += sum + myCart[i].price;
     }
     setSum(total);
-  }, []);
+  }
+  
+  const calculateOrderRows = () => {
+    let orderRows = [];
+    for(let i = 0; i < myCart.length; i++) {
+      orderRows.push({productId: myCart[i].productId});
+    }
+    setOrderRowsToShip(orderRows);
+  }
 
   const updateForm = (formValue) => {
     setUserForm(formValue);
   }
 
   const placeOrder = (e) => {
+    calculateOrderRows();
     const newOrder = {
       orderRows: {
-        ...shoppingCart
+        ...orderRowsToShip
       },
 
       customerDTO: {
-        Name: JSON.stringify(userForm.firstname) + JSON.stringify(userForm.lastname),
-        Address:  JSON.stringify(userForm.address),
-        ZipCode: JSON.stringify(userForm.zipcode),
-        City: JSON.stringify(userForm.city)
+        Name: userForm.fullname,
+        Address:  userForm.address,
+        ZipCode: userForm.zipcode,
+        City: userForm.city
       }, 
     };
     console.log(newOrder);
@@ -68,6 +83,7 @@ export default function Checkout(props) {
     const removeItem = (e) => {
       const tempCart = [...shoppingCart];
       const item = {
+        title: product.title,
         productId: product.productId,
         price: product.price,
       };
@@ -86,7 +102,7 @@ export default function Checkout(props) {
     }
     return (
       <CheckoutItem
-        name={product.productId}
+        title={product.title}
         price={product.price}
         updateCart={removeItem}
       />
@@ -103,7 +119,7 @@ export default function Checkout(props) {
         <div className="shopping-cart">
           {cartItems}
         </div>
-        <p className="total">Total: {sum} :-</p>
+        <p className="total">Total: {sum}:-</p>
         <button type="button" onClick={placeOrder}>
           Check out
         </button>
