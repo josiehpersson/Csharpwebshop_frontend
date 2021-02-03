@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import HeadPhones from './orangeheadphones.JPG';
 import ProductList from '../ProductList/ProductList';
 
 import './home.css';

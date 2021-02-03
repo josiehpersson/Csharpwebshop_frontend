@@ -1,4 +1,4 @@
-import React, { useEffect, useState, MouseEvent } from 'react';
+import React, { useEffect, useState } from 'react';
 import './checkout.css';
 import UserForm from '../UserForm/UserForm';
 import CheckoutItem from '../CheckoutItem/CheckoutItem';
@@ -39,10 +39,10 @@ export default function Checkout(props) {
 
   const placeOrder = (e) => {
     const newOrder = {
-      totalPrice: sum,
       orderRows: {
         ...shoppingCart
       },
+
       customerDTO: {
         Name: JSON.stringify(userForm.firstname) + JSON.stringify(userForm.lastname),
         Address:  JSON.stringify(userForm.address),
@@ -72,7 +72,7 @@ export default function Checkout(props) {
         price: product.price,
       };
       let itemIndex = tempCart.findIndex(function (ind) {
-        return ind.productId == item.productId;
+        return ind.productId === item.productId;
       });
       if (itemIndex !== -1) {
         tempCart.splice(itemIndex, 1);

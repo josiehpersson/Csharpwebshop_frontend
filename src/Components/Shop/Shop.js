@@ -15,11 +15,16 @@ function Shop() {
   const myCart = [];
   const [cart, setCart] = useState(myCart);
 
+  useEffect(() => {
+    setCart(myCart);
+  },[]);
+
+
   const addToCart = (props) => {
     myCart.push(...cart);
     let product = {
       productId : props.productId,
-      Price : props.productPrice,
+      Price : props.price,
     };
     myCart.push(product);
     setCart(myCart);
