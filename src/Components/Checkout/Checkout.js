@@ -18,14 +18,12 @@ export default function Checkout(props) {
   const [shoppingCart, setShoppingCart] = useState(cartDefault);
 
   const [sum, setSum] = useState(0);
-  const defaultOrderRowsToShip = {};
-  const [orderRowsToShip, setOrderRowsToShip] = useState(defaultOrderRowsToShip);
+  const defaultOrderRows= [];
+  const [OrderRows, setOrderRows] = useState(defaultOrderRows);
   const myCart = [];
   
   useEffect(() => {
     calculateShoppingCart();
-    calculateOrderRows();
-    //myCart.push(...shoppingCart);
   }, []);
   
   const calculateShoppingCart = () => {
@@ -40,11 +38,16 @@ export default function Checkout(props) {
   }
   
   const calculateOrderRows = () => {
-    let orderRows = [];
+    let orderRowsToShip = [];
     for(let i = 0; i < myCart.length; i++) {
-      orderRows.push({productId: myCart[i].productId});
+      orderRowsToShip.push(
+        {
+          productId: myCart[i].productId
+        }
+      );
     }
-    setOrderRowsToShip(orderRows);
+    setOrderRows(orderRowsToShip);
+    console.log(OrderRows);
   }
 
   const updateForm = (formValue) => {
@@ -54,11 +57,9 @@ export default function Checkout(props) {
   const placeOrder = (e) => {
     calculateOrderRows();
     const newOrder = {
-      orderRows: {
-        ...orderRowsToShip
-      },
+      OrderRows,
 
-      customerDTO: {
+      CustomerDTO: {
         Name: userForm.fullname,
         Address:  userForm.address,
         ZipCode: userForm.zipcode,
