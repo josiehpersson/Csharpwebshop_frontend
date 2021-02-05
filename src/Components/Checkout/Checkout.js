@@ -18,21 +18,23 @@ export default function Checkout(props) {
   const [shoppingCart, setShoppingCart] = useState(cartDefault);
 
   const [sum, setSum] = useState(0);
+
   const defaultOrderRows= [];
   const [OrderRows, setOrderRows] = useState(defaultOrderRows);
+
   const myCart = [];
-  
+
   useEffect(() => {
     calculateShoppingCart();
   }, []);
-  
+
   const calculateShoppingCart = () => {
     setSum(0);
     myCart.push(...props.myShoppingCart);
     setShoppingCart(myCart);
     let total = 0;
     for (let i = 0; i < myCart.length; i++) {
-      total += sum + myCart[i].price;
+      total = sum + myCart[i].price;
     }
     setSum(total);
   }
@@ -47,7 +49,6 @@ export default function Checkout(props) {
       );
     }
     setOrderRows(orderRowsToShip);
-    console.log(OrderRows);
   }
 
   const updateForm = (formValue) => {
@@ -66,7 +67,6 @@ export default function Checkout(props) {
         City: userForm.city
       }, 
     };
-    console.log(newOrder);
 
     const baseURL = `https://localhost:5001/order`;
 

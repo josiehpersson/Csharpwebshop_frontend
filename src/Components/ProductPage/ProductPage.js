@@ -32,7 +32,7 @@ function ProductPage(props) {
 
   return (
     <div className="productpage-container">
-      <img src={productInfo.image} alt={`${productInfo.title} image`} className={`${productInfo.title} image`}/>
+      <img src={productInfo.image} alt={`${productInfo.title}`} className="product-img"/>
       <div className="productinfo-container">
         <div className="productinfo">
           <h5>{productInfo.title}</h5>
